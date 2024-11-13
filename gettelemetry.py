@@ -7,7 +7,7 @@ class TMClient:
     def __init__(self, host='localhost', port=9000, max_reconnect_attempts=5):
         self._struct_str = '<' + 'f' * 19
         self._nb_bytes = struct.calcsize(self._struct_str)
-        print(f"Expecting {self._nb_bytes} bytes per message ({19} floats)")
+        #print(f"Expecting {self._nb_bytes} bytes per message ({19} floats)")
         self._host = host
         self._port = port
         self.max_reconnect_attempts = max_reconnect_attempts
@@ -53,7 +53,7 @@ class TMClient:
                         try:
                             # Try to read exact amount needed
                             bytes_needed = self._nb_bytes - len(data_raw)
-                            print(f"\nWaiting for {bytes_needed} bytes...")
+                            #print(f"\nWaiting for {bytes_needed} bytes...")
                             
                             chunk = s.recv(bytes_needed)
                             chunk_size = len(chunk)
@@ -62,22 +62,22 @@ class TMClient:
                                 print("Server closed connection (received 0 bytes)")
                                 break
                             
-                            print(f"Received chunk of {chunk_size} bytes")
+                            #print(f"Received chunk of {chunk_size} bytes")
                             data_raw += chunk
                             current_buffer = len(data_raw)
-                            print(f"Current buffer size: {current_buffer} bytes")
+                            #print(f"Current buffer size: {current_buffer} bytes")
                             
                             # Process complete messages
                             while len(data_raw) >= self._nb_bytes:
                                 msg_count += 1
-                                print(f"\nProcessing message #{msg_count}")
+                                #print(f"\nProcessing message #{msg_count}")
                                 
                                 # Extract one complete message
                                 data_msg = data_raw[:self._nb_bytes]
                                 data_raw = data_raw[self._nb_bytes:]
                                 
-                                print(f"Message size: {len(data_msg)} bytes")
-                                print(f"Remaining buffer: {len(data_raw)} bytes")
+                                #print(f"Message size: {len(data_msg)} bytes")
+                                #print(f"Remaining buffer: {len(data_raw)} bytes")
                                 
                                 # Store the latest message
                                 with self.__lock:
@@ -128,12 +128,12 @@ class TMClient:
                             'fr_slip': data[17],
                             'gear': int(data[18])
                         }
-                        
+                        '''
                         print(f"\nParsed data successfully:")
                         print(f"Speed: {result['speed']:.2f}")
                         print(f"Position: ({result['position']['x']:.1f}, {result['position']['y']:.1f}, {result['position']['z']:.1f})")
                         print(f"Checkpoint: {result['checkpoint']}, Lap: {result['lap']}")
-                        
+                        '''
                         return result
                         
                     except struct.error as e:
