@@ -41,3 +41,10 @@ class GamepadHandler:
         self.gamepad.release_button(button=0x2000) # reset release
         self.gamepad.reset() 
         self.gamepad.update()
+
+    def press_a(self):
+        self.gamepad.press_button(button=0x1000)
+        self.gamepad.update()
+        time.sleep(0.05)
+        self.gamepad.release_button(button=0x1000)
+        self.gamepad.update()
