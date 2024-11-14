@@ -128,12 +128,12 @@ class TMClient:
                             'fr_slip': data[17],
                             'gear': int(data[18])
                         }
-                        '''
-                        print(f"\nParsed data successfully:")
-                        print(f"Speed: {result['speed']:.2f}")
-                        print(f"Position: ({result['position']['x']:.1f}, {result['position']['y']:.1f}, {result['position']['z']:.1f})")
-                        print(f"Checkpoint: {result['checkpoint']}, Lap: {result['lap']}")
-                        '''
+                        
+                        #print(f"\nParsed data successfully:")
+                        #print(f"Speed: {result['speed']:.2f}")
+                        #print(f"Position: ({result['position']['x']:.1f}, {result['position']['y']:.1f}, {result['position']['z']:.1f})")
+                        #print(f"Checkpoint: {result['checkpoint']}, Lap: {result['lap']}")
+                        
                         return result
                         
                     except struct.error as e:
