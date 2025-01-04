@@ -16,7 +16,6 @@ class GamepadHandler:
         
     def send_action(self, action):
         steer, throttle, brake = action
-        
         #print(f"Sending action - Steer: {steer:.2f}, Throttle: {throttle:.2f}, Brake: {brake:.2f}")
         
         # x-axis (-1 to 1)
@@ -31,13 +30,13 @@ class GamepadHandler:
         # gamepad state
         self.gamepad.update()
 
-        time.sleep(0.001)
+        time.sleep(0.01)
 
     def reset(self):
         self.gamepad.reset()
         self.gamepad.press_button(button=0x2000)  # reset press
         self.gamepad.update()
-        time.sleep(0.05)
+        time.sleep(0.1)
         self.gamepad.release_button(button=0x2000) # reset release
         self.gamepad.reset() 
         self.gamepad.update()
@@ -45,6 +44,6 @@ class GamepadHandler:
     def press_a(self):
         self.gamepad.press_button(button=0x1000)
         self.gamepad.update()
-        time.sleep(0.05)
+        time.sleep(0.1)
         self.gamepad.release_button(button=0x1000)
         self.gamepad.update()
